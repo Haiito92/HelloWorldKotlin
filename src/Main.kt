@@ -53,6 +53,14 @@ fun main() {
         println("\nNew account balance: ${studentAccount.balance}")
 
     })
+
+    val studentOneAccount = StudentAccount(studentOne, 50.0)
+
+    println("\n${describe(studentOne)}")
+    println("\n${describe(firstTask)}")
+    println("\n${describe(studentOneAccount)}")
+    println("\n${describe(0.0)}")
+
     return
 }
 
@@ -72,4 +80,13 @@ fun applyActionOnActiveStudent(student: Student, action: (Student) -> Unit) {
     }
 
     action(student)
+}
+
+fun describe(value: Any): String{
+    when(value){
+        is Student -> return "Student:\n-Id: ${value.id}\n-Name: ${value.name}\n-Email: ${value.email ?: "unknow"}\n-Active: ${value.active}\n-Grades: ${value.grades}"
+        is Task -> return "Task:\n-Id: ${value.id}\n-Title: ${value.title}\n-Completed: ${value.completed}"
+        is StudentAccount -> return "StudentAccount\n-Owner: ${value.owner.name}\n-Balance: ${value.balance}"
+        else -> return "Unknown type."
+    }
 }
