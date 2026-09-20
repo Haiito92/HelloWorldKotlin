@@ -61,6 +61,9 @@ fun main() {
     println("\n${describe(studentOneAccount)}")
     println("\n${describe(0.0)}")
 
+    val bestGrade = getBestGrade(*studentOne.getValidGrades().toIntArray())
+    println("\nBest grade: $bestGrade")
+
     return
 }
 
@@ -89,4 +92,8 @@ fun describe(value: Any): String{
         is StudentAccount -> return "StudentAccount\n-Owner: ${value.owner.name}\n-Balance: ${value.balance}"
         else -> return "Unknown type."
     }
+}
+
+fun getBestGrade(vararg grades: Int): Int? {
+    return grades.maxOrNull()
 }
