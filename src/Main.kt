@@ -41,6 +41,18 @@ fun main() {
     newGrades = applyOperationOnIntList(students[0].getValidGrades()) { (it * 0.2).toInt() }
     println("\nNew grades: $newGrades")
 
+    applyActionOnActiveStudent(studentOne, {student ->
+        println("\nWelcome ${student.name}!")
+        println("Your grades: ${student.grades}.")
+
+        val studentAccount = StudentAccount(student, 0.0)
+        println("Initial account balance: ${studentAccount.balance}")
+
+        println("\nMaking a deposit of: ${100.0}")
+        studentAccount.deposit(100.0)
+        println("\nNew account balance: ${studentAccount.balance}")
+
+    })
     return
 }
 
@@ -51,4 +63,13 @@ fun printStudentNames(students: List<Student>, title: String) {
 
 fun applyOperationOnIntList(list: List<Int>, operation: (Int) -> Int): List<Int> {
     return list.map { operation(it) }
+}
+
+fun applyActionOnActiveStudent(student: Student, action: (Student) -> Unit) {
+    if (!student.active) {
+        println("\nStudent inactive. Can't apply action.")
+        return
+    }
+
+    action(student)
 }
